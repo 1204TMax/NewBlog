@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.BlogPhotosMapper">
+  <resultMap id="BaseResultMap" type="com.po.BlogPhotos">
+    <id column="photo_id" jdbcType="INTEGER" property="photoId" />
+    <result column="photo_src" jdbcType="VARCHAR" property="photoSrc" />
+    <result column="photo_description" jdbcType="VARCHAR" property="photoDescription" />
+    <result column="upload_time" jdbcType="INTEGER" property="uploadTime" />
+    <result column="upload_ip" jdbcType="VARCHAR" property="uploadIp" />
+    <result column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="photo_name" jdbcType="VARCHAR" property="photoName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    photo_id, photo_src, photo_description, upload_time, upload_ip, blog_id, photo_name
+  </sql>
+  <select id="selectByExample" parameterType="com.po.BlogPhotosExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_photos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_photos
+    where photo_id = #{photoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_photos
+    where photo_id = #{photoId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.po.BlogPhotosExample">
+    delete from blog_photos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.po.BlogPhotos">
+    insert into blog_photos (photo_id, photo_src, photo_description, 
+      upload_time, upload_ip, blog_id, 
+      photo_name)
+    values (#{photoId,jdbcType=INTEGER}, #{photoSrc,jdbcType=VARCHAR}, #{photoDescription,jdbcType=VARCHAR}, 
+      #{uploadTime,jdbcType=INTEGER}, #{uploadIp,jdbcType=VARCHAR}, #{blogId,jdbcType=INTEGER}, 
+      #{photoName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.po.BlogPhotos">
+    insert into blog_photos
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="photoId != null">
+        photo_id,
+      </if>
+      <if test="photoSrc != null">
+        photo_src,
+      </if>
+      <if test="photoDescription != null">
+        photo_description,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+      <if test="uploadIp != null">
+        upload_ip,
+      </if>
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="photoName != null">
+        photo_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="photoId != null">
+        #{photoId,jdbcType=INTEGER},
+      </if>
+      <if test="photoSrc != null">
+        #{photoSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="photoDescription != null">
+        #{photoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=INTEGER},
+      </if>
+      <if test="uploadIp != null">
+        #{uploadIp,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="photoName != null">
+        #{photoName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.po.BlogPhotosExample" resultType="java.lang.Long">
+    select count(*) from blog_photos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update blog_photos
+    <set>
+      <if test="record.photoId != null">
+        photo_id = #{record.photoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.photoSrc != null">
+        photo_src = #{record.photoSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photoDescription != null">
+        photo_description = #{record.photoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadTime != null">
+        upload_time = #{record.uploadTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.uploadIp != null">
+        upload_ip = #{record.uploadIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogId != null">
+        blog_id = #{record.blogId,jdbcType=INTEGER},
+      </if>
+      <if test="record.photoName != null">
+        photo_name = #{record.photoName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update blog_photos
+    set photo_id = #{record.photoId,jdbcType=INTEGER},
+      photo_src = #{record.photoSrc,jdbcType=VARCHAR},
+      photo_description = #{record.photoDescription,jdbcType=VARCHAR},
+      upload_time = #{record.uploadTime,jdbcType=INTEGER},
+      upload_ip = #{record.uploadIp,jdbcType=VARCHAR},
+      blog_id = #{record.blogId,jdbcType=INTEGER},
+      photo_name = #{record.photoName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.po.BlogPhotos">
+    update blog_photos
+    <set>
+      <if test="photoSrc != null">
+        photo_src = #{photoSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="photoDescription != null">
+        photo_description = #{photoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=INTEGER},
+      </if>
+      <if test="uploadIp != null">
+        upload_ip = #{uploadIp,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null">
+        blog_id = #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="photoName != null">
+        photo_name = #{photoName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where photo_id = #{photoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.po.BlogPhotos">
+    update blog_photos
+    set photo_src = #{photoSrc,jdbcType=VARCHAR},
+      photo_description = #{photoDescription,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=INTEGER},
+      upload_ip = #{uploadIp,jdbcType=VARCHAR},
+      blog_id = #{blogId,jdbcType=INTEGER},
+      photo_name = #{photoName,jdbcType=VARCHAR}
+    where photo_id = #{photoId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertphoto" parameterType="com.po.BlogPhotos">
+    insert into blog_photos(photo_src,photo_description,blog_id,photo_name) values(#{photoSrc},#{photoDescription},#{blogId},#{photoName})
+  </insert>
+   <select id="searchmaxphotoid" resultType="Integer">
+  SELECT max(photo_id) FROM blog_photos
+  </select>
+</mapper>
