@@ -65,7 +65,8 @@ public class UserServiceImpl implements UserService  {
 	}
 	public String login(String userName,String userPwd,String aa){
 		UserExample userexample = new UserExample();
-		UserExample.Criteria userCriteria=userexample.createCriteria();
+		UserExample.Criteria
+		userCriteria=userexample.createCriteria();
 		userCriteria.andUserNameEqualTo(userName);
 		List<User> users = this.UserMapper.selectByExample(userexample);
 		if(users.size() != 0){

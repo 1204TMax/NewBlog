@@ -9,7 +9,6 @@
 String path = request.getContextPath();  
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
 %>  
-<script type="text/javascript" src="<%=basePath %>images/login/login.js"></script>
 <link href="<%=basePath %>css/login/login2.css" rel="stylesheet" type="text/css" />
 </head>
 <body style="background: #fff url(<%=basePath %>images/1.jpg) 50% 0 no-repeat;">
@@ -22,17 +21,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<a class="switch_btn" id="switch_login" href="<%=basePath %>view/register.jsp" tabindex="8">快速注册</a><div class="switch_bottom" id="switch_bottom" style="position: absolute; width: 64px; left: 0px;"></div>
         </div>
     </div>    
-  
     
     <div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">    
 
             <!--登录-->
             <div class="web_login" id="web_login">
-               
-               
                <div class="login-box">
-    
-            
 			<div class="login_form">
 				<form action="<%=basePath %>login"  class="loginForm" method="post">
                <input type="hidden" name="to" value="log"/>

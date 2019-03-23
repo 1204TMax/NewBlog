@@ -66,7 +66,7 @@ public class Fileupload {
                    if(file!=null)
                    {
                 	   HttpSession session = request.getSession();
-                       String path="D:/blogimages/"+file.getOriginalFilename();
+                       String path="D:/Hblog/headimage"+file.getOriginalFilename();
                        
                        //上传
                        file.transferTo(new File(path));

@@ -17,7 +17,6 @@ import com.Service.UserServiceImpl;
 import com.Service.BlogService;
 import com.po.Blog;
 import com.po.User;
-import com.getip.getIP;
 @Controller
 public class BlogController {
 	@Resource(name="BlogServiceImpl")
